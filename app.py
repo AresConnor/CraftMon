@@ -47,7 +47,7 @@ def home():
     if not offline:
         cleaned_motd = '\n'.join(response['motd']['clean'])
         player_list = []
-        for player in response['players']['list']:
+        for player in response['players'].get('list',[]):
             name = player['name']
             uuid = player['uuid']
             img = f'https://crafatar.com/renders/head/{uuid}'
