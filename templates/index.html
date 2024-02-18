@@ -7,113 +7,113 @@
 <html>
 
 <head>
-	{% if offline %}
-	<title>{{ name }}</title>
-	{% else %}
-	<title>{{ name }} | {{ motd }}</title>
-	{% endif %}
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="icon" type="image/png" href="{{ logo }}">
-	<link rel="stylesheet" href="/assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="/assets/css/noscript.css" />
-	</noscript>
+    {% if offline %}
+        <title>{{ name }}</title>
+    {% else %}
+        <title>{{ name }} | {{ motd }}</title>
+    {% endif %}
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="icon" type="image/png" href="{{ logo }}">
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="/assets/css/noscript.css"/>
+    </noscript>
 </head>
 
 <body class="is-preload">
 
-	<!-- Wrapper-->
-	<div id="wrapper">
+<!-- Wrapper-->
+<div id="wrapper">
 
-		<!-- Nav -->
-		<nav id="nav">
-			<a href="#" class="icon solid fa-home"><span>主页</span></a>
-			<a href="#preview" class="icon solid fa-folder"><span>服务器预览</span></a>
-			<a href="#contact" class="icon solid fa-envelope"><span>加入我们</span></a>
-			<a href="https://github.com/GamerNoTitle/CraftMon" class="icon brands fa-github"
-				target="_blank"><span>Github</span></a>
-		</nav>
+    <!-- Nav -->
+    <nav id="nav">
+        <a href="#" class="icon solid fa-home"><span>主页</span></a>
+        <a href="#preview" class="icon solid fa-folder"><span>服务器预览</span></a>
+        <a href="#sponsorship" class="icon solid fa-envelope"><span>赞助列表</span></a>
+        <a href="https://github.com/GamerNoTitle/CraftMon" class="icon brands fa-github"
+           target="_blank"><span>Github</span></a>
+    </nav>
 
-		<!-- Main -->
-		<div id="main">
+    <!-- Main -->
+    <div id="main">
 
-			<!-- Home -->
-			<article id="home" class="panel intro">
-				<header>
-					<h1>{{ name }}</h1>
-					{% if offline %}
-					<p>服务器目前不在线~</p>
-					{% else %}
-					<p>{{ motd }}</p>
-					{% endif %}
-					{% if show_info %}
-					<p>服务器地址：<strong>{{host}}:{{port}}</strong></p>
-					{% endif %}
-					{% if not offline %}
-					<hr>
-					<p>当前在线人数：{{ current }}/{{ maxp }}</p>
-					{% for player in player_list %}
-					<p><img src={{player.img}} height="40px"> {{player.name}}</p>
-					{% endfor %}
-					{% endif %}
-				</header>
-				<a href="#preview" class="jumplink pic">
-					<span class="arrow icon solid fa-chevron-right"><span>查看服务器展示</span></span>
-					<img src="{{ logo }}" alt="" />
-				</a>
-			</article>
+        <!-- Home -->
+        <article id="home" class="panel intro">
+            <header>
+                <h1>{{ name }}</h1>
+                {% if offline %}
+                    <p>服务器目前不在线~</p>
+                {% else %}
+                    <p>{{ motd }}</p>
+                {% endif %}
+                {% if show_info %}
+                    <p>服务器地址：<strong>{{ host }}:{{ port }}</strong></p>
+                {% endif %}
+                {% if not offline %}
+                    <hr>
+                    <p>当前在线人数：{{ current }}/{{ maxp }}</p>
+                    {% for player in player_list %}
+                        <p><img src={{ player.img }} height="40px"> {{ player.name }}</p>
+                    {% endfor %}
+                {% endif %}
+            </header>
+            <a href="#preview" class="jumplink pic">
+                <span class="arrow icon solid fa-chevron-right"><span>查看服务器展示</span></span>
+                <img src="{{ logo }}" alt=""/>
+            </a>
+        </article>
 
-			<!-- Work -->
-			<article id="preview" class="panel">
-				<header>
-					<h2>{{ preview_title }}</h2>
-				</header>
-				<p>
-					{{ preview_descr|safe }}
-				</p>
-				<section>
-					<div class="row">
-						{% for image in preview_images %}
-						<div class="col-4 col-6-medium col-12-small">
-							<a href="#" class="image fit"><img src="/images/{{image}}" alt=""></a>
-						</div>
-						{% endfor %}
-					</div>
-				</section>
-			</article>
+        <!-- Work -->
+        <article id="preview" class="panel">
+            <header>
+                <h2>{{ preview_title }}</h2>
+            </header>
+            <p>
+                {{ preview_descr|safe }}
+            </p>
+            <section>
+                <div class="row">
+                    {% for image in preview_images %}
+                        <div class="col-4 col-6-medium col-12-small">
+                            <a href="#" class="image fit"><img src="/images/{{ image }}" alt=""></a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </article>
 
-			<!-- Contact -->
-			<article id="contact" class="panel">
-				<header>
-					<h2>加入我们</h2>
-				</header>
-				{{ join_content|safe }}
-			</article>
+        <!-- sponsorship -->
+        <article id="sponsorship" class="panel">
+            <header>
+                <h2>赞助列表</h2>
+            </header>
+            <!-- [头像] [赞助者名] - [金额] -->
+            {% for sponsor in sponsor_list %}
+                <p><img src={{ sponsor.image }} height="40px"> {{ sponsor.name }}({{ sponsor.player_name }}) sponsored {{ sponsor.amount }} on {{ sponsor.date }}</p>
+            {% endfor %}
+        </article>
 
-		</div>
+    </div>
 
-		<!-- Footer -->
-		<div id="footer">
-			<ul class="copyright">
-				<li>Copyright &copy; 2022-
-					<script>document.write(new Date().getFullYear())</script> <a href="https://bili33.top"
-						target="_blank"><u>GamerNoTitle</u></a>.
-				</li>
-				<li>Open-Source project <a href="https://github.com/GamerNoTitle/CraftMon"
-						target="_blank"><u>CraftMon</u></a> is now avaliabel on Github.</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
+    <!-- Footer -->
+    <div id="footer">
+        <ul class="copyright">
+            <li>Open-Source project <a href="https://github.com/GamerNoTitle/CraftMon"
+                                       target="_blank"><u>CraftMon</u></a> is now available on Github.
+            </li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
 
-	</div>
+</div>
 
-	<!-- Scripts -->
-	<script src="/assets/js/jquery.min.js"></script>
-	<script src="/assets/js/browser.min.js"></script>
-	<script src="/assets/js/breakpoints.min.js"></script>
-	<script src="/assets/js/util.js"></script>
-	<script src="/assets/js/main.js"></script>
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/browser.min.js"></script>
+<script src="/assets/js/breakpoints.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
 
 </body>
 
