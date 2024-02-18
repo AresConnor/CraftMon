@@ -13,7 +13,7 @@ server:
   port: 10187
   # 查询信息实际用的是query这个端口，在server.properties里面有，需要自行设置端口并且把这个功能打开
   query: 10188
-  logo: https://cdn.bilicdn.tk/gh/Vikutorika/newassets@master/img/Miscellaneous/EMUnion.jpg
+  logo: https://s1.imagehub.cc/images/2024/02/18/f713cce95a34a9931bda33b198e71bbb.jpeg # https://www.imagehub.cc/image/1hdlTk
   preview: # 服务器预览部分
     title: 这里是Lanbing233Pixel服务器
     # 预览界面的描述，可以用html书写
