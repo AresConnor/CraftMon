@@ -22,5 +22,5 @@ server:
       可爱蓝冰酱的主页：<a href="https://space.bilibili.com/85294317" target="_blank"><u>摸鱼冰</u></a>，IP在蓝冰酱的小群里。
 
     images: # 服务器的预览图片，你需要把文件丢在images文件夹里面，然后复制文件名在这里
-      - 2024-02-02_15.05.52.png
-      - 2024-02-10_00.04.07.png
+      - https://s1.imagehub.cc/images/2024/02/18/fb236ab9df8378e4d8d1b159b7476349.png
+      - https://s1.imagehub.cc/images/2024/02/18/8864afadc292cfcf68a28b53c2182934.png
