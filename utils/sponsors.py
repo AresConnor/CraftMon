@@ -3,6 +3,7 @@ import yaml
 
 
 def load_sponsors() -> list:
+    print("Loading sponsors...")
     with open("./sponsors.yml", "r",encoding='utf-8') as f:
         data = yaml.safe_load(f)
 

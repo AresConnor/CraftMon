@@ -1,11 +1,12 @@
 import requests
 import yaml
 from flask import Flask, render_template, send_from_directory
-
+from utils import init_requests_cache
 from utils.sponsors import load_sponsors
 
 app = Flask(__name__)
 app.template_folder = 'templates'
+init_requests_cache()
 
 with open('config.yml', encoding='utf8') as f:
     conf = yaml.load(f.read(), Loader=yaml.FullLoader)
@@ -19,8 +20,6 @@ mc_logo = conf['server']['logo']
 mc_preview_title = conf['server']['preview']['title']
 mc_preview_descr = conf['server']['preview']['descr']
 mc_preview_images = conf['server']['preview']['images']
-
-sponsor_list = load_sponsors()
 
 host = conf['web']['host']
 port = conf['web']['port']
@@ -47,6 +46,7 @@ def home():
     if not offline:
         cleaned_motd = '\n'.join(response['motd']['clean'])
         player_list = []
+        print("Loading players...")
         for player in response['players'].get('list',[]):
             name = player['name']
             uuid = player['uuid']
@@ -66,7 +66,7 @@ def home():
                                preview_descr=mc_preview_descr,
                                preview_images=mc_preview_images,
                                player_list=player_list,
-                               sponsor_list=sponsor_list,
+                               sponsor_list=load_sponsors(),
                                offline=offline)
     else:
         return render_template('index.html',
