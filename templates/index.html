@@ -19,6 +19,16 @@
     <noscript>
         <link rel="stylesheet" href="/assets/css/noscript.css"/>
     </noscript>
+
+    <style>
+        .scrollable-div {
+            height: 175px;
+            width: 620px;
+            overflow-y: auto;
+            border: 0 solid #444;
+            padding: 5px;
+        }
+    </style>
 </head>
 
 <body class="is-preload">
@@ -53,9 +63,13 @@
                 {% if not offline %}
                     <hr>
                     <p>当前在线人数：{{ current }}/{{ maxp }}</p>
-                    {% for player in player_list %}
-                        <p><img src={{ player.img }} height="40px"> {{ player.name }}</p>
-                    {% endfor %}
+
+                    <!-- 玩家列表容器 -->
+                    <div class="scrollable-div">
+                        {% for player in player_list %}
+                            <p><img src={{ player.img }} height="40px"> {{ player.name }}</p>
+                        {% endfor %}
+                    </div>
                 {% endif %}
             </header>
             <a href="#preview" class="jumplink pic">
@@ -90,7 +104,8 @@
             </header>
             <!-- [头像] [赞助者名] - [金额] -->
             {% for sponsor in sponsor_list %}
-                <p><img src={{ sponsor.image }} height="40px"> {{ sponsor.name }}({{ sponsor.player_name }}) sponsored {{ sponsor.amount }} on {{ sponsor.date }}</p>
+                <p><img src={{ sponsor.image }} height="40px"> {{ sponsor.name }}({{ sponsor.player_name }})
+                    sponsored {{ sponsor.amount }} on {{ sponsor.date }}</p>
             {% endfor %}
         </article>
 
