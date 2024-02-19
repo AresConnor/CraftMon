@@ -71,7 +71,7 @@ def home():
                                port=mc_port,
                                show_info=mc_show_info,
                                motd=cleaned_motd,
-                               current=response['players']['online'],
+                               current=f"{response['players']['online']}({len(response['players'].get('list', []))})",
                                maxp=response['players']['max'],
                                logo=mc_logo,
                                preview_title=mc_preview_title,
