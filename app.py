@@ -1,8 +1,10 @@
+import functools
+
 import requests
 import yaml
 from flask import Flask, render_template, send_from_directory
 
-from utils import init_requests_cache
+from utils.auto_fetch import Fetcher
 from utils.sponsors import load_sponsors
 
 app = Flask(__name__)
@@ -20,7 +22,7 @@ mc_logo = conf['server']['logo']
 mc_preview_title = conf['server']['preview']['title']
 mc_preview_descr = conf['server']['preview']['descr']
 mc_preview_images = conf['server']['preview']['images']
-init_requests_cache(conf['request']['cache_expire_time'])
+fetcher = Fetcher(conf['task']['interval'])
 
 host = conf['web']['host']
 port = conf['web']['port']
@@ -40,7 +42,12 @@ def serve_images(filename):
 def home():
     offline = False
     try:
-        response = requests.get(f'https://api.mcsrvstat.us/3/{mc_host}:{mc_port}').json()
+        response = fetcher.get(
+            "server_status",
+            functools.partial(
+                lambda: requests.get(f'https://api.mcsrvstat.us/3/{mc_host}:{mc_port}').json()
+            )
+        )
         offline = not response['online']
     except TimeoutError:
         offline = True
@@ -54,6 +61,10 @@ def home():
             img = f'https://crafatar.com/renders/head/{uuid}'
             print(img)
             player_list.append({'name': name, 'img': img})
+        sponsors = fetcher.get(
+            "get_sponsors",
+            functools.partial(load_sponsors)
+        )
         return render_template('index.html',
                                name=mc_name,
                                host=mc_host,
@@ -67,7 +78,7 @@ def home():
                                preview_descr=mc_preview_descr,
                                preview_images=mc_preview_images,
                                player_list=player_list,
-                               sponsor_list=load_sponsors(),
+                               sponsor_list=sponsors,
                                offline=offline)
     else:
         return render_template('index.html',

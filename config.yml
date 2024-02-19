@@ -25,5 +25,5 @@ server:
       - https://s1.imagehub.cc/images/2024/02/18/fb236ab9df8378e4d8d1b159b7476349.md.png # 将md.png替换为.png为原图
       - https://s1.imagehub.cc/images/2024/02/18/8864afadc292cfcf68a28b53c2182934.md.png
 
-request:
-  cache_expire_time: 300
+task:
+  interval: 10

@@ -3,7 +3,6 @@ import yaml
 
 
 def load_sponsors() -> list:
-    print("Loading sponsors...")
     with open("./sponsors.yml", "r",encoding='utf-8') as f:
         data = yaml.safe_load(f)
 
@@ -13,7 +12,6 @@ def load_sponsors() -> list:
             if 'player_name' not in e:
                 e['player_name'] = 'Unknown'
             e['image'] = get_img(session, e['player_name'])
-            print(e)
     return sorted(data['sponsors'],key=lambda x: x['amount'],reverse=True)
 
 
