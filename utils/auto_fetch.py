@@ -18,7 +18,7 @@ class Task:
         self.result_lock.acquire()
         self.result = result
         self.result_lock.release()
-        
+
         return self.result
 
     def get_result(self):
