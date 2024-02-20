@@ -27,6 +27,7 @@ server:
       - https://s1.imagehub.cc/images/2024/02/20/517bc9d2a3e3f7c7dc7d4170860ef199.md.png
       - https://s1.imagehub.cc/images/2024/02/20/6a011c11bb3499d7e9eb83e357ad74e3.md.png
       - https://s1.imagehub.cc/images/2024/02/20/68d06ac4c5e5d0213a654c8419697741.md.png
+      - https://s1.imagehub.cc/images/2024/02/20/ce0334d986542f712e7623ded9786e26.md.png
 
 task:
   interval: 180
