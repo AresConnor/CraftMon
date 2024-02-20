@@ -13,9 +13,12 @@ class Task:
         self.result_lock = threading.Lock()
 
     def run(self):
+        result = self.function(*self.args, **self.kwargs)
+
         self.result_lock.acquire()
-        self.result = self.function(*self.args, **self.kwargs)
+        self.result = result
         self.result_lock.release()
+        
         return self.result
 
     def get_result(self):
