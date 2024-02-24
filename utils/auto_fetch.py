@@ -1,4 +1,5 @@
 import functools
+import logging
 import threading
 import time
 
@@ -32,11 +33,12 @@ class Task:
 
 
 class Fetcher:
-    def __init__(self, interval):
+    def __init__(self, interval, logger:logging.Logger):
         self.interval = interval
         self.tasks: dict[str, Task] = {}
         self.tasks_lock = threading.Lock()
         self.init_timer()
+        self.logger = logger
 
     def get(self, task_name, function: functools.partial, *args, **kwargs):
         if task_name not in self.tasks:
@@ -48,11 +50,14 @@ class Fetcher:
     def init_timer(self):
         def run_tasks():
             begin = time.time()
-            print(f"Fetcher: Running tasks...")
+            self.logger.info(f"Fetcher: Running tasks...")
             self.tasks_lock.acquire()
             for task in self.tasks.values():
-                task.run()
-            print(f"Fetcher: Finished running {len(self.tasks)} tasks in {time.time() - begin:.2f}s.")
+                try:
+                    task.run()
+                except Exception as e:
+                    self.logger.error(f"Fetcher: Error while running task {task.name}: {e}")
+            self.logger.info(f"Fetcher: Finished running {len(self.tasks)} tasks in {time.time() - begin:.2f}s.")
             self.tasks_lock.release()
 
             self.init_timer()

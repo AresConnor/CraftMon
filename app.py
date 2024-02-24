@@ -22,7 +22,7 @@ mc_logo = conf['server']['logo']
 mc_preview_title = conf['server']['preview']['title']
 mc_preview_descr = conf['server']['preview']['descr']
 mc_preview_images = conf['server']['preview']['images']
-fetcher = Fetcher(conf['task']['interval'])
+fetcher = Fetcher(conf['task']['interval'],app.logger)
 
 host = conf['web']['host']
 port = conf['web']['port']
