@@ -6,7 +6,7 @@ server:
   # 如果你想显示你的服务器连接信息的话，就把下面这个show-info改为true，否则保持不动
   show-info: false
   # 服务器名字
-  name: Lanbing233Pixel
+  name: 摸鱼服
   # 服务器地址
   host: S9C.52MC.PRO
   # 这个port只是拿来展示的，如果上面关掉了的话可以不动它
