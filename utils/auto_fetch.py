@@ -2,7 +2,6 @@ import functools
 import logging
 import threading
 import time
-import warnings
 
 
 class Task:
@@ -52,14 +51,14 @@ class Fetcher:
     def init_timer(self):
         def run_tasks():
             begin = time.time()
-            print(f"Fetcher: Running tasks...")
+            self.logger.info(f"Fetcher: Running tasks...")
             self.tasks_lock.acquire()
             for task in self.tasks.values():
                 try:
                     task.run()
                 except Exception as e:
-                    warnings.warn(f"Fetcher: Error while running task {task.name}: {e}")
-            print(f"Fetcher: Finished running {len(self.tasks)} tasks in {time.time() - begin:.2f}s.")
+                    self.logger.error(f"Fetcher: Error while running task {task.name}: {e}")
+            self.logger.info(f"Fetcher: Finished running {len(self.tasks)} tasks in {time.time() - begin:.2f}s.")
             self.tasks_lock.release()
             self.init_timer()
         timer = threading.Timer(self.interval, run_tasks)

@@ -1,14 +1,16 @@
 import functools
+import logging
 
 import requests
 import yaml
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
 
 from utils.auto_fetch import Fetcher
 from utils.sponsors import load_sponsors
 
 app = Flask(__name__)
 app.template_folder = 'templates'
+app.logger.setLevel(logging.INFO)
 
 with open('config.yml', encoding='utf8') as f:
     conf = yaml.load(f.read(), Loader=yaml.FullLoader)
@@ -40,6 +42,7 @@ def serve_images(filename):
 
 @app.route('/')
 def home():
+    app.logger.info(f" >>> request from {request.remote_addr}")
     offline = False
     try:
         response = fetcher.get(
@@ -54,12 +57,11 @@ def home():
     if not offline:
         cleaned_motd = '\n'.join(response['motd']['clean'])
         player_list = []
-        print("Loading players...")
+        app.logger.info("Loading players...")
         for player in response['players'].get('list', []):
             name = player['name']
             uuid = player['uuid']
             img = f'https://crafatar.com/renders/head/{uuid}'
-            print(img)
             player_list.append({'name': name, 'img': img})
         sponsors = fetcher.get(
             "get_sponsors",
