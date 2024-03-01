@@ -61,9 +61,7 @@ class Fetcher:
                     warnings.warn(f"Fetcher: Error while running task {task.name}: {e}")
             print(f"Fetcher: Finished running {len(self.tasks)} tasks in {time.time() - begin:.2f}s.")
             self.tasks_lock.release()
-
-        self.init_timer()
-
+            self.init_timer()
         timer = threading.Timer(self.interval, run_tasks)
         timer.daemon = True
         timer.start()
