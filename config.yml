@@ -15,10 +15,10 @@ server:
   query: 10188
   logo: https://s1.imagehub.cc/images/2024/02/18/f713cce95a34a9931bda33b198e71bbb.jpeg # https://www.imagehub.cc/image/1hdlTk
   preview: # 服务器预览部分
-    title: 这里是Lanbing233Pixel服务器
+    title: 这里是 摸鱼服 服务器
     # 预览界面的描述，可以用html书写
     descr: |
-      Lanbing233Pixel是一个生电-建筑主题的公益服务器，版本1.20.4-carpet，客户端原版即可，Java-BE互通，玩家们大多都是蓝冰的fans，主要在服里复刻蓝冰的像素小人还有一些建筑。服里还有各位生电服的大佬（划掉）再次坐镇，欢迎大家的加入！
+      摸鱼服是一个生电-建筑主题的公益服务器，版本1.20.4-carpet，客户端原版即可，Java-BE互通，玩家们大多都是蓝冰的fans，主要在服里复刻蓝冰的像素小人还有一些建筑。服里还有各位生电服的大佬（划掉）再次坐镇，欢迎大家的加入！
       可爱蓝冰酱的主页：<a href="https://space.bilibili.com/85294317" target="_blank"><u>摸鱼冰</u></a>，IP在蓝冰酱的小群里。
 
     images: # 服务器的预览图片，你需要把文件丢在images文件夹里面，然后复制文件名在这里
@@ -30,4 +30,4 @@ server:
       - https://s1.imagehub.cc/images/2024/02/20/ce0334d986542f712e7623ded9786e26.md.png
 
 task:
-  interval: 180
+  interval: 300
